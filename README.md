@@ -1,7 +1,6 @@
-## NAME : MANASA DEVI AT
-## REG NO:212224110036
-
-# EXP NO 3 - Uploading temperature sensor data in Thing Speak cloud
+## NAME : KISHORE A
+## REG NO : 212223110022
+## EXP-3  Uploading temperature sensor data in Thing Speak cloud
 
 # AIM:
 To monitor the temperature sensor data in the Thing speak using an ESP32 controller.
@@ -79,65 +78,71 @@ Automatically act on your data and communicate using third-party services like T
 #include <WiFi.h>
 #include "DHT.h"
 
-char ssid[]="slytherinn";
-char pass[]="26062007";
+char ssid[] = "vivo Y22";
+char pass[] = "12345678";
 
-const int out=2;
-float temperature=0;
-float humidity=0;
+const int out = 2;
+long T;
+float temperature = 0;
 WiFiClient client;
-DHT dht(out,DHT11);
+DHT dht(out, DHT11);
 
-unsigned long myChannelField=3095478 ;
-const int TemperatureField=1;
-const int HumidityField=2;
-const char* myWriteAPIKey = "PADT8MTSUPYRDV8X";
-void setup()
-{
+unsigned long myChannelField =  3091123;
+const int TemperatureField = 1;
+const int HumidityField = 2; 
+const char* myWriteAPIKey = "AQ5F40ND5QPACRV9";
+
+void setup() {
   Serial.begin(115200);
   ThingSpeak.begin(client);
+  WiFi.mode(WIFI_STA);
   dht.begin();
-  pinMode(out,INPUT);
+  pinMode(out, INPUT);
+  // put your setup code here, to run once:
+
 }
-void loop()
+
+void loop() 
 {
-  if(WiFi.status() != WL_CONNECTED)
+  if (WiFi.status() != WL_CONNECTED)
   {
-    Serial.print("Attempting to connect to SSID:");
+    Serial.print("Attempting to conenct to SSID: ");
     Serial.println(ssid);
-    while(WiFi.status()!=WL_CONNECTED)
+    while (WiFi.status() != WL_CONNECTED)
     {
-      WiFi.begin(ssid,pass);
+      WiFi.begin(ssid, pass);
       Serial.print(".");
       delay(5000);
     }
     Serial.println("\nConnected.");
   }
-  temperature = dht.readTemperature();
-  humidity = dht.readHumidity();
- 
+
+  float temperature = dht.readTemperature();
+  float humidity = dht.readHumidity();
+
   Serial.print("Temperature: ");
   Serial.print(temperature);
-  Serial.println(" C");
+  Serial.println(" °C");
 
   Serial.print("Humidity: ");
-Serial.print(humidity);
+  Serial.print(humidity);
   Serial.println(" g.m-3");
-ThingSpeak.setField(TemperatureField,temperature);
-ThingSpeak.setField(HumidityField,humidity);
-ThingSpeak.writeFields(myChannelField,myWriteAPIKey);
-delay(5000);
+ ThingSpeak.setField(TemperatureField, temperature);
+ ThingSpeak.setField(HumidityField, humidity);
+    ThingSpeak.writeField(myChannelField,myWriteAPIKey);
+  delay(1000);
 }
 ```
-
 # CIRCUIT DIAGRAM:
-<img width="1599" height="1200" alt="image" src="https://github.com/user-attachments/assets/c799ade3-af12-40a0-8100-79b60e95d780" />
+![WhatsApp Image 2025-10-10 at 10 12 44_f1a6cc28](https://github.com/user-attachments/assets/142838f9-c603-4123-92ce-cf884c0b779a)
 
 # OUTPUT:
-<img width="1920" height="1200" alt="Screenshot (277)" src="https://github.com/user-attachments/assets/a90be348-b5f8-4f55-84dd-5a519d104f81" />
+<img width="1920" height="1020" alt="Screenshot 2025-10-09 042708" src="https://github.com/user-attachments/assets/1efe29c2-692d-41c5-94ee-6a2c036684d7" />
+<img width="1920" height="1020" alt="Screenshot 2025-10-09 042602" src="https://github.com/user-attachments/assets/9eb96602-af5b-46d6-9032-fdb75bc45cad" />
 
-<img width="1920" height="1200" alt="Screenshot (275)" src="https://github.com/user-attachments/assets/a8b6dd1c-633f-4cb1-a61d-50c91c9ae180" />
+
 
 # RESULT:
+
 Thus the temperature sensor values are updated in the Thing speak using ESP32 controller.
 

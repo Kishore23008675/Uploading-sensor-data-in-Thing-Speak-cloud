@@ -78,8 +78,8 @@ Automatically act on your data and communicate using third-party services like T
 #include <WiFi.h>
 #include "DHT.h"
 
-char ssid[] = "vivo Y22";
-char pass[] = "12345678";
+char ssid[] = "kishore";
+char pass[] = "kishore2005";
 
 const int out = 2;
 long T;
@@ -87,10 +87,10 @@ float temperature = 0;
 WiFiClient client;
 DHT dht(out, DHT11);
 
-unsigned long myChannelField =  3091123;
+unsigned long myChannelField =  3106338;
 const int TemperatureField = 1;
 const int HumidityField = 2; 
-const char* myWriteAPIKey = "AQ5F40ND5QPACRV9";
+const char* myWriteAPIKey = "6K8V7RAXCWZ94MP3";
 
 void setup() {
   Serial.begin(115200);
